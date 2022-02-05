@@ -37,6 +37,19 @@ class LinkRepo {
     })
     return updateResponse
   }
+
+  async listItems(filterArgs) {
+
+    const filter = filterArgs ? {
+      checkbox: {
+        equals: filterArgs.isChecked,
+        property: "checked"
+      }
+    } : {}
+
+    const res = await this.__client.databases.query({database_id: databaseId, ...filter })
+    return res
+  }
 }
 
 class AddLink {
@@ -60,9 +73,32 @@ class AddLink {
   }
 }
 
-const usecase = new AddLink(new LinkRepo())
+class GetUnreadLinks {
+  __repo = null
+  constructor(repo) {
+    this.__repo = repo
+  }
+
+  async execute() {
+    const items = await this.__repo.listItems({isChecked: false})
+    console.log("listItems ->", items)
+    return items
+  }
+}
+
+const addLink = new AddLink(new LinkRepo())
+const getUnreadLinks = new GetUnreadLinks(new LinkRepo())
 async function main() {
-  await usecase.execute("https://xaksis.github.io/vue-good-table/guide/advanced/remote-workflow.html#set-mode-to-remote")
+  // await addLink.execute("https://xaksis.github.io/vue-good-table/guide/advanced/remote-workflow.html#set-mode-to-remote")
+  await getUnreadLinks.execute()
+
 }
 main()
 
+/**
+ * TODO: add controller
+ *  cloud function
+ *  cli tool
+ *
+ * TODO: create NoSQL Schema from json file
+ */
