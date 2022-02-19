@@ -8,7 +8,7 @@ const notionClient = new Client({ auth: process.env.NOTION_KEY })
 
 const databaseId = process.env.NOTION_DATABASE_ID
 
-class LinkRepo {
+export class LinkRepo {
   __client = notionClient
 
   async create(link, name="") {
@@ -52,7 +52,7 @@ class LinkRepo {
   }
 }
 
-class AddLink {
+export class AddLink {
   __repo = null
   constructor(repo) {
     this.__repo = repo
@@ -73,7 +73,7 @@ class AddLink {
   }
 }
 
-class GetUnreadLinks {
+export class GetUnreadLinks {
   __repo = null
   constructor(repo) {
     this.__repo = repo
@@ -86,19 +86,11 @@ class GetUnreadLinks {
   }
 }
 
-const addLink = new AddLink(new LinkRepo())
-const getUnreadLinks = new GetUnreadLinks(new LinkRepo())
-async function main() {
-  // await addLink.execute("https://xaksis.github.io/vue-good-table/guide/advanced/remote-workflow.html#set-mode-to-remote")
-  await getUnreadLinks.execute()
-
-}
-main()
 
 /**
+ *  cli tool
  * TODO: add controller
  *  cloud function
- *  cli tool
  *
  * TODO: create NoSQL Schema from json file
  */
