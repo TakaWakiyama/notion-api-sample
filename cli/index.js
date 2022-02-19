@@ -1,2 +1,4 @@
 import { program } from "commander"
-import { GetUnreadLinks } from "notion-link"
+import command from "notion-link"
+
+console.log(command.getUnreadLinks())
