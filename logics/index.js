@@ -86,7 +86,7 @@ export class GetUnreadLinks {
   }
 }
 
-
+/*
 class Controller {
   _addLink = null
   _getUnreadLink = null
@@ -104,17 +104,4 @@ class Controller {
     this._getUnreadLink.execute()
   }
 }
-/**
- *  cli tool
- * TODO: add controller
- *  cloud function
- *
- * TODO: create NoSQL Schema from json file
- */
-
-const newController = () => {
-  const repo = new LinkRepo()
-  return new Controller(new AddLink(repo), new GetUnreadLinks(repo))
-}
-
-export default newController()
+*/
