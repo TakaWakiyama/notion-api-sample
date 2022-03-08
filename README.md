@@ -13,3 +13,11 @@ set .env
 NOTION_KEY=${your notion api key}
 NOTION_DATABASE_ID=${your data base id}
 ```
+
+## connect Alfred4
+
+```bash
+set Alfred env var
+which node
+node ${this_dir}/index add https://hogehoge
+```

@@ -63,8 +63,13 @@ export class AddLink {
     }
     try {
       const res = await fetch(url)
-      const result = (await res.text()).match(/<title>(.+)<\/title>/)
-      const title = result[1]
+      let title = ""
+      try {
+        const result = (await res.text()).match(/<title>(.+)<\/title>/)
+        title = result[1]
+      } catch (error) {
+        title = "未取得"
+      }
       const created = await this.__repo.create(url, title)
       console.log("success!! see detail ->", created)
     } catch (error) {
